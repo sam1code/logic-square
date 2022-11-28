@@ -1,7 +1,14 @@
 import React from "react";
 import AddEmpModal from "./AddEmpModal";
 
-const BannerZone = ({ data, setData, setFilter }) => {
+const BannerZone = ({
+  data,
+  setData,
+  setFilter,
+  pagination,
+  setPagination,
+  totalData,
+}) => {
   const [addEmp, setAddEmp] = React.useState(false);
   const addEmployModal = () => {
     setAddEmp(!addEmp);
@@ -17,13 +24,13 @@ const BannerZone = ({ data, setData, setFilter }) => {
                 <h5 className="text-secondary mb-2">
                   Available:
                   <span className="font-weight-bold ml-1 text-dark">
-                    {data?.filter((item) => item.available).length}
+                    {totalData?.filter((item) => item.available).length}
                   </span>
                 </h5>
                 <h5 className="text-secondary">
                   Total:
                   <span className="font-weight-bold ml-1 text-dark">
-                    {data.length}
+                    {totalData.length}
                   </span>
                 </h5>
                 ​
@@ -114,6 +121,25 @@ const BannerZone = ({ data, setData, setFilter }) => {
               </table>
             </div>
           </div>
+        </div>
+        <div>
+          {pagination > 1 && (
+            <button
+              className="btn btn-primary"
+              onClick={() => setPagination(pagination - 1)}
+            >
+              Previous
+            </button>
+          )}
+
+          {totalData.length / 10 > pagination && (
+            <button
+              className="btn btn-primary"
+              onClick={() => setPagination(pagination + 1)}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
