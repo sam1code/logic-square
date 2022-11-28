@@ -45,10 +45,11 @@ const BannerZone = ({ data, setData, setFilter }) => {
             ​
             <select
               class="form-select"
-              onChange={(e) => setData(e.target.value)}
+              onChange={(e) => setFilter(e.target.value)}
             >
               <option selected>Filter</option>
               <option value="1">Available</option>
+              <option value="2">Not Available</option>
             </select>
             <div className="table-responsive mt-3 mt-md-4 mb-2">
               <table className="table table-bordered">

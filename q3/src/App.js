@@ -7,11 +7,15 @@ function App() {
   const [data, setData] = useState(employees);
   const [filter, setFilter] = useState("All");
   useEffect(() => {
-    if (filter === "All") {
-      setData(employees);
-    } else {
-      console.log(data);
-      setData(data);
+    switch (filter) {
+      case "1":
+        setData(employees.filter((item) => item.available));
+        break;
+      case "2":
+        setData(employees.filter((item) => !item.available));
+        break;
+      default:
+        setData(employees);
     }
   }, [filter, data]);
   return (
