@@ -52,6 +52,7 @@ function App() {
         pagination={pagination}
         totalData={totalEmp}
         setTotalEmp={setTotalEmp}
+        totalEmp={totalEmp}
       />
     </div>
   );

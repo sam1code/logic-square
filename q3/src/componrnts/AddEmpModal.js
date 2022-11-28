@@ -1,6 +1,34 @@
 import React from "react";
 
-const AddEmpModal = ({ setData, toggleModal }) => {
+const AddEmpModal = ({ totalEmp, setTotalEmp, toggleModal }) => {
+  const [empData, setEmpData] = React.useState({
+    id: crypto.getRandomValues(new Uint32Array(1))[0],
+    name: "",
+    department: "",
+    available: true,
+    gender: "",
+    designation: "",
+    joiningDate: "",
+    age: 0,
+  });
+
+  const addEmployee = (e) => {
+    if (
+      !empData.name ||
+      !empData.department ||
+      !empData.designation ||
+      !empData.joiningDate ||
+      !empData.gender ||
+      !empData.age
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+    setTotalEmp([...totalEmp, empData]);
+    toggleModal();
+    alert("Emloy Added Successfully");
+  };
+
   return (
     <div
       style={{
@@ -40,7 +68,7 @@ const AddEmpModal = ({ setData, toggleModal }) => {
         </div>
         <hr />
 
-        <form
+        <div
           style={{
             textAlign: "left",
           }}
@@ -54,7 +82,13 @@ const AddEmpModal = ({ setData, toggleModal }) => {
               <label for="name" className="form-label">
                 Name
               </label>
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                className="form-control"
+                onChange={(e) =>
+                  setEmpData({ ...empData, name: e.target.value })
+                }
+              />
             </div>
             <div
               className="mb-3"
@@ -70,6 +104,9 @@ const AddEmpModal = ({ setData, toggleModal }) => {
                 style={{
                   width: "12rem",
                 }}
+                onChange={(e) =>
+                  setEmpData({ ...empData, gender: e.target.value })
+                }
               >
                 <option selected>Choose...</option>
                 <option value={"male"}>Male</option>
@@ -86,7 +123,17 @@ const AddEmpModal = ({ setData, toggleModal }) => {
               <label for="available" className="form-label">
                 Age
               </label>
-              <input type="number" className="form-control" id="available" />
+              <input
+                type="number"
+                className="form-control"
+                id="available"
+                onChange={(e) =>
+                  setEmpData({
+                    ...empData,
+                    age: e.target.value,
+                  })
+                }
+              />
             </div>
             <div
               className="mb-3"
@@ -97,7 +144,17 @@ const AddEmpModal = ({ setData, toggleModal }) => {
               <label for="available" className="form-label">
                 Designation
               </label>
-              <input type="text" className="form-control" id="available" />
+              <input
+                type="text"
+                className="form-control"
+                id="available"
+                onChange={(e) =>
+                  setEmpData({
+                    ...empData,
+                    designation: e.target.value,
+                  })
+                }
+              />
             </div>
           </div>
           <div
@@ -109,7 +166,14 @@ const AddEmpModal = ({ setData, toggleModal }) => {
               <label for="available" className="form-label">
                 Department
               </label>
-              <input type="text" className="form-control" id="available" />
+              <input
+                type="text"
+                className="form-control"
+                id="available"
+                onChange={(e) =>
+                  setEmpData({ ...empData, department: e.target.value })
+                }
+              />
             </div>
             <div
               className="mb-3"
@@ -127,13 +191,16 @@ const AddEmpModal = ({ setData, toggleModal }) => {
                 style={{
                   width: "12rem",
                 }}
+                onChange={(e) =>
+                  setEmpData({ ...empData, joiningDate: e.target.value })
+                }
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button className="btn btn-primary" onClick={addEmployee}>
             Save
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

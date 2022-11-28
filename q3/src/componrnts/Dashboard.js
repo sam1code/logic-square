@@ -8,6 +8,8 @@ const BannerZone = ({
   pagination,
   setPagination,
   totalData,
+  setTotalEmp,
+  totalEmp,
 }) => {
   const [addEmp, setAddEmp] = React.useState(false);
   const addEmployModal = () => {
@@ -42,9 +44,10 @@ const BannerZone = ({
                 </button>
                 {addEmp && (
                   <AddEmpModal
-                    setData={setData}
                     key={1}
                     toggleModal={() => setAddEmp(!addEmp)}
+                    setTotalEmp={setTotalEmp}
+                    totalEmp={totalEmp}
                   />
                 )}
               </div>
